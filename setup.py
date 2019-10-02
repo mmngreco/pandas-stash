@@ -8,7 +8,12 @@ setup(
     license='NSCA',
     author='Kevin Sheppard',
     url='https://github.com/bashtage/pandas-stash',
-    long_description=open('README.md').read()
+    long_description=open('README.md').read(),
+    install_requires=[
+        "pandas>=0.15",
+        "numpy>=1.7",
+        "tables>=3.00",
+        ]
 )
 
 
