@@ -12,7 +12,16 @@ from .compat import SCALAR_TYPES, long, u
 from .vault import Vault
 
 DEFAULT_PATH = 'workspace.h5'
-PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel, pd.Panel4D)
+
+if pd.__version__ < "0.23":
+    # https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.23.0.html#removal-of-prior-version-deprecations-changes
+    PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel, pd.Panel4D)
+elif pd.__version__ < "0.25":
+    # https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.25.0.html#removal-of-prior-version-deprecations-changes
+    PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel)
+else:
+    PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel)
+
 PANDAS_NUMPY_MAP = dict([(i + 1, pd_type)
                          for i, pd_type in enumerate(PANDAS_TYPES)])
 SCALAR_TYPES_LIST = tuple(SCALAR_TYPES)
